@@ -1,0 +1,8 @@
+<agm-map #AgmMap [latitude]="lat" [longitude]="lng"
+	[zoom]="10" [minZoom]="9" [maxZoom]="17"
+	[mapTypeId]="'hybrid'" [fullscreenControl]="true"
+	(mapReady)="onMapReady($event)"
+	(zoomChange)="onZoomChange($event)">
+  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+<!--  <agm-marker *ngFor="let m of coordList; let i = index" [latitude]="m.lat" [longitude]="m.lng"></agm-marker>  -->
+</agm-map>
