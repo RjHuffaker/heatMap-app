@@ -1,0 +1,28 @@
+div.filter-box {
+	background-color: white;
+	border: 2px inset;
+	width: 100%;
+	padding: 10px;
+}
+
+ul {
+	list-style: none;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	line-height: 1;
+}
+
+label {
+	overflow: hidden;
+	white-space: nowrap;
+	margin: 0;
+	padding: 0;
+	line-height: 1;
+}

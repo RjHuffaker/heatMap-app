@@ -1,0 +1,239 @@
+<ng-template #timeSheetModal let-close="close">
+	<app-time-sheet-modal [modalData]="modalData"
+		(onTimeChange)="timeChange()"
+		(onTotalChange)="totalChange()"
+		(onConfirmPunch)="confirmPunch()"
+		(onDeletePunch)="deletePunch()"
+		(onCloseModal)="close()"
+		></app-time-sheet-modal>
+</ng-template>
+
+<div class="container">
+
+	<div class="row">
+		<div class="col-5">
+			<h1>Time Sheet</h1>
+		</div>
+		<ng-container *ngIf="currentTimeCard">
+			<div class="col">
+				<br/>
+				<button class="prevBtn btn btn-outline-primary" (click)="prevMonth()">Prev</button>
+			</div>
+			<div class="col text-center" style="padding-top: 20px; overflow-y: none;">
+				<h3>{{currentDate.format('MMMM YYYY')}}</h3>
+			</div>
+			<div class="col">
+				<br/>
+				<button class="nextBtn btn btn-outline-primary" (click)="nextMonth()">Next</button>
+			</div>
+		</ng-container>
+	</div>
+
+	<ul class="tabList">
+		<ng-container *ngFor="let timeCard of timeCardList">
+			<li (click)="selectTimeCard(timeCard)" [ngClass]="{'selected': timeCard.id===selectId}">
+				{{timeCard.name}}
+			</li>
+		</ng-container>
+	</ul>
+	
+	<br/>
+
+	<div *ngIf="currentTimeCard">
+
+		<app-time-sheet-calendar
+			[month]="month" [dateRange1]="dateRange1" [dateRange2]="dateRange2"
+			[punchData]="currentTimeCard.punchData"
+			(dayClicked)="toggleModal($event)">
+		</app-time-sheet-calendar>
+
+		<br/>
+
+		<ul class="tabList">
+			<ng-container *ngFor="let tab of tabList; index as i">
+				<li (click)="currentTab = i" [ngClass]="{'selected': i === currentTab}">
+					{{tab}}
+				</li>
+			</ng-container>
+		</ul>
+
+		<div class="container">
+
+			<div *ngFor="let dateRange of [dateRange1, dateRange2]; index as i"
+				[hidden]="currentTab !== i">
+				<div class="payPeriod container" *ngIf="yearlyTotal[dateRange]">
+					<div class="row">
+						<div class="col">
+							<h5>
+								Pay Period: {{timeSheetMathService.readDateRange(dateRange)}}
+							</h5>
+						</div>
+					</div>
+
+					<div class="row no-gutters tableRow">
+						<div class="col-4">	
+						</div>
+						<div class="col-4 text-right">
+							<strong>Regular</strong>&nbsp;
+						</div>
+						<div class="col-4 text-right">
+							<strong>Overtime</strong>&nbsp;
+						</div>
+					</div>
+
+					<div *ngFor="let week of [yearlyTotal[dateRange].week1, yearlyTotal[dateRange].week2, yearlyTotal[dateRange].week3]; index as i" class="row no-gutters" [ngClass]="week.name">
+						<ng-container *ngIf="week.days[0]">
+							<div class="col-4 tableCell">
+								<strong>
+									Week {{i+1}}:
+								</strong>
+							</div>
+							<div class="col-8 row no-gutters" *ngIf="week.days[0].isBefore(moment())"
+								[ngStyle]="{'text-shadow':indicatorService.getHourly(timeSheetMathService.getCurrentTotal(currentTimeCard, week.days[week.days.length-1]))}">
+								<div class="col w-50 text-right tableCell">
+									{{timeSheetMathService.displayTime(week.regular)}}&nbsp;
+								</div>
+								<div class="col w-50 text-right tableCell">
+									{{timeSheetMathService.displayTime(week.overtime)}}&nbsp;
+								</div>
+							</div>
+							<div class="col-8 row no-gutters" *ngIf="week.days[0].isAfter(moment())">
+								<div class="col w-50 text-right tableCell">
+								</div>
+								<div class="col w-50 text-right tableCell">
+								</div>
+							</div>
+						</ng-container>
+					</div>
+
+					<hr style="margin: 0;">
+
+					<div class="row no-gutters">
+						<div class="col-4">
+							<strong>Total:</strong>
+						</div>
+
+						<div class="col-8 row no-gutters" *ngIf="yearlyTotal[dateRange].week1.days[0].isBefore(moment())">
+							<div class="col w-50 text-right">
+								{{timeSheetMathService.displayTime(yearlyTotal[dateRange].regular)}}&nbsp;
+							</div>
+							<div class="col w-50 text-right">
+								{{timeSheetMathService.displayTime(yearlyTotal[dateRange].overtime)}}&nbsp;
+							</div>
+						</div>
+						
+					</div>
+
+					<div class="row no-gutters">
+						<div class="col-4">
+							<strong>Vacation:</strong>&nbsp;
+						</div>
+						<div class="col-8 text-right" *ngIf="yearlyTotal[dateRange].week1.days[0].isBefore(moment())"
+							[ngClass]="timeSheetMathService.checkDateRange(dateRange)"
+							(click)="toggleModal({ mode: 'vacationPunch', currentDate: date, dateRange: dateRange })">
+							<span>{{timeSheetMathService.displayTime(yearlyTotal[dateRange].vacation)}}</span>&nbsp;
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div [hidden]="currentTab !== 2">
+				<div class="payPeriod container">
+					<div class="row">
+						<div class="col">
+							<h5>
+								Yearly Total: {{yearlyTotal.firstDay.format('MMMM D, YYYY')}} - {{yearlyTotal.lastDay.format('MMMM D, YYYY')}}
+							</h5>
+						</div>
+					</div>
+
+					<div class="row no-gutters tableRow">
+						<div class="col-6">
+							<strong>Regular</strong>
+						</div>
+						<div class="col-6 text-right">
+							{{timeSheetMathService.displayTime(yearlyTotal.regular)}}&nbsp;
+						</div>
+					</div>
+
+					<div class="row no-gutters tableRow">
+						<div class="col-6">
+							<strong>Overtime</strong>
+						</div>
+						<div class="col-6 text-right">
+							{{timeSheetMathService.displayTime(yearlyTotal.overtime)}}&nbsp;
+						</div>
+					</div>
+
+					<div class="row no-gutters tableRow">
+						<div class="col-6">
+							<strong>Vacation</strong>
+						</div>
+						<div class="col-6 text-right">
+							{{timeSheetMathService.displayTime(yearlyTotal.vacation)}}&nbsp;
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div [hidden]="currentTab !== 3">
+				<div class="container">
+					<div class="row">
+						<div class="col-4 col-sm-2">
+							<h5>Name:</h5>
+						</div>
+						<div class="col-8 col-sm-4 col-md-2">
+							<input class="form-control" type="text" [(ngModel)]="timeCardName">
+						</div>
+
+						<div class="col-4 col-sm-2">
+							<h5>Hourly:</h5>
+						</div>
+						<div class="col-8 col-sm-4 col-md-2">
+							<input class="form-control" type="checkbox" 
+								[(ngModel)]="timeCardSettings['hourly']"
+								[(checked)]="timeCardSettings['hourly']">
+						</div>
+
+
+					</div>
+
+					<br>
+
+					<div class="row">
+						<div class="col-4 col-sm-2">
+							<button class="btn btn-outline-primary w-100"
+								(click)="toggleModal({mode: 'uploadCSV'})">
+								Upload CSV
+							</button>
+						</div>
+						<div class="col-4 col-sm-2">
+							<button class="btn btn-success w-100"
+								(click)="editTimeCard(currentTimeCard)">
+								Update
+							</button>
+						</div>
+						<div class="col-4 col-sm-2">
+							<button class="btn btn-outline-danger w-100"
+								(click)="deleteTimeCard(currentTimeCard)">
+								Delete
+							</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+	<div *ngIf="selectId===0">
+		<h3>Create New TimeCard</h3>
+		<input class="w-100" type="text" [(ngModel)]="timeCardName">
+		<button (click)="addTimeCard()">create</button>
+	</div>
+	
+</div>

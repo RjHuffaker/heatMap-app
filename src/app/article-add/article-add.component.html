@@ -1,0 +1,38 @@
+<div class="container" *ngIf="newArticle">
+	<br/>
+	<div class="row no-gutters">
+		<div class="col-3 col-sm-2">
+			<h5>Title:</h5>
+		</div>
+		<div class="col-9 col-sm-4">
+			<input class="form-control" type="text" [(ngModel)]="newArticle.title">
+		</div>
+		<div class="col-3 col-sm-2">
+			<h5>Author:</h5>
+		</div>
+		<div class="col-9 col-sm-4">
+			<input class="form-control" type="text" [(ngModel)]="newArticle.author">
+		</div>
+	</div>
+	
+	<div class="row no-gutters">
+		<div class="col">
+			<quill-editor class="editor"
+				[modules]="editorModules"
+				[style]="{height: '500px'}"
+				(onEditorCreated)="onEditorCreated($event)"
+				(onContentChanged)="onContentChanged($event)"
+				[(ngModel)]="newArticle.content">
+			</quill-editor>
+		</div>
+	</div>
+	<br/>
+	<div class="row">
+		<div class="col-3 col-sm-2">
+			<button class="btn btn-primary w-100" (click)="addArticle()">Save</button>
+		</div>
+		<div class="col-3 col-sm-2">
+			<button class="btn btn-secondary w-100" (click)="goBack()">Cancel</button>
+		</div>
+	</div>
+</div>

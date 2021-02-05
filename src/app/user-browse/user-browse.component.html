@@ -1,0 +1,51 @@
+<div *ngIf="userList" class="container noselect">
+	
+	<div class="row">
+		<div class="col">
+			<h1>Manage Users</h1>
+		</div>
+	</div>
+
+	<div class="row" style="border-bottom: 2px solid grey;">
+		<div class="col-6 col-sm-4 col-md-3 col-lg-2">
+			<strong><h4>Username</h4></strong>
+		</div>
+		<div class="col-6 col-sm-4 col-md-3 col-lg-2">
+			<strong><h4>Role</h4></strong>
+		</div>
+		<div class="d-none d-md-inline col-md-6 col-lg-8">
+			<span><h4>Details</h4></span>
+		</div>
+	</div>
+
+	<div *ngFor="let user of userList" (click)="selectRow(user.id)"
+		[ngClass]="{'selectedRow': user.id===selectedRowId}" class="row crudRow">
+		<div class="col-6 col-md-3 col-lg-2">
+			<span>{{user.username}}</span>
+		</div>
+		<div class="col-6 col-md-3 col-lg-2">
+			<span>{{user.role}}</span>
+		</div>
+		<div *ngIf="user.techList" class="d-none d-md-inline col-md-6 col-lg-8">
+			<div *ngIf="user.techList.length">
+				<strong>Assigned Techs: </strong>
+				<span *ngFor="let tech of user.techList; let isLast=last"> {{tech}}{{isLast ? '' : ',  '}}</span>
+			</div>
+			<div *ngIf="user.taskList.length">
+				<strong>Assigned Tasks: </strong>
+				<span *ngFor="let task of user.taskList; let isLast=last"> {{task}}{{isLast ? '' : ',  '}}</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="row" style="margin-top: 16px;">
+		<div class="col-6 col-sm-4 col-md-3">
+			<button class="btn btn-primary w-100" (click)="addUser()">Create New User</button>
+		</div>
+	</div>
+
+</div>
+
+<div *ngIf="!userList" align="center">
+	<img class="pl-3 loadingIcon" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+</div>

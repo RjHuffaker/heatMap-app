@@ -1,0 +1,234 @@
+/* You can add global styles to this file, and also import other style files */
+//@import "styles-variables";
+
+@import "~bootstrap/dist/css/bootstrap.css";
+@import '~bootstrap/scss/bootstrap-reboot';
+@import '~bootstrap/scss/bootstrap-grid';
+
+@import "~quill/dist/quill.snow.css";
+@import "~quill/dist/quill.bubble.css";
+
+@import "~angular-calendar/css/angular-calendar.css";
+
+@import "~flatpickr/dist/flatpickr.css";
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.outer-container {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 1vw;
+  position: absolute;
+}
+
+.inner-container {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+h1 {
+  color: #369;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 200%;
+  margin-top: 16px;
+  margin-bottom: 12px;
+}
+
+h2, h3 {
+  color: #444;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: lighter;
+}
+
+body, input[type="text"], button {
+  font-family: Cambria, Georgia;
+}
+
+/* everywhere else */
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+nav {
+  > a {
+    text-decoration: none;
+  }
+}
+
+.pokable {
+  cursor: pointer;
+}
+
+.hoverOutline:hover {
+  box-shadow: inset 0px 0px 2px 2px #4285F4;
+}
+
+.hoverUnderline:hover {
+  text-decoration: underline;
+}
+
+.hoverBackground:hover {
+  background-color: lightblue;
+}
+
+.tableRow {
+  div {
+    padding-right: 2px;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+  }
+}
+
+.topRow {
+  div {
+    padding: 2px;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    font-weight: bold;
+  }
+}
+
+.selectedRow {
+  background-color: lightblue;
+}
+
+.tableCell {
+  padding: 2px;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.scrollDivOuter {
+  height: 200px;
+  overflow-y: scroll;
+  overflow-x: none;
+  border: 1px solid;
+}
+
+.scrollDivInner {
+  cursor: pointer;
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    div {
+      padding: 3px;
+    }
+    span {
+      font-size: 12pt;
+    }
+  }
+}
+
+.iconDiv {
+  font-size: 16pt;
+  padding: 0 !important;
+  span {
+    cursor: pointer;
+  }
+}
+
+.text-10 {
+  font-size: 10pt;
+}
+
+.tabList {
+  list-style: none;
+  position: relative;
+  margin: 0;
+  padding: 0;
+
+  &:before {
+    z-index: 1;
+  }
+
+  &:after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    border-bottom: 1px solid #AAA;
+    box-shadow: 1px 1px 0 #FFF;
+    z-index: 1;
+  }
+
+  li {
+    display: inline-block;
+    position: relative;
+    z-index: 0;
+    margin: 0 10px;
+    padding: 0 10px;
+    border: 1px solid #AAA;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    background: #D1D1D1;
+    cursor: pointer;
+
+    &:before,
+    &:after {
+      position: absolute;
+      bottom: -1px;
+      width: 6px;
+      height: 6px;
+      border: 1px solid #AAA;
+      content: " ";
+    }
+
+    &:before {
+      left: -6px;
+      border-bottom-right-radius: 6px;
+      border-width: 0 1px 1px 0;
+      box-shadow: 2px 2px 0 #D1D1D1;
+    }
+
+    &:after {
+      right: -6px;
+      border-bottom-left-radius: 6px;
+      border-width: 0 0 1px 1px;
+      box-shadow: -2px 2px 0 #D1D1D1;
+    }
+  }
+
+  li.selected {
+    background: #FFF;
+    color: #000;
+    z-index: 2;
+    border-bottom-color: #FFF;
+
+    &:before {
+      box-shadow: 2px 2px 0 #FFF;
+    }
+
+    &:after {
+      box-shadow: -2px 2px 0 #FFF;
+    }
+  }
+}
+
+.tabContent {
+  padding: 1px;
+  background: #FFF;
+}

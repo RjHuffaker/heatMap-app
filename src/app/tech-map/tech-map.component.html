@@ -1,0 +1,92 @@
+<div class="inner-container">	<div class="search-container">
+	<input type="text" placeholder="Search for Location" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control" #search id="search-input">
+</div>
+<agm-map #AgmMap [latitude]="lat" [longitude]="lng"
+	[zoom]="zoom" [minZoom]="1" [maxZoom]="20"
+	[mapTypeId]="'hybrid'" [fullscreenControl]="true"
+	[gestureHandling]="'greedy'"
+	(centerChange)="onCenterChange($event)"
+	(zoomChange)="onZoomChange($event)"
+	(mapReady)="onMapReady($event)">
+
+	<agm-marker *ngFor="let setup of techMarkerService.markerList"
+		[latitude]="setup.latitude" [longitude]="setup.longitude"
+		[iconUrl]="setup.icon" [title]="setup.title"></agm-marker>
+	
+</agm-map>
+
+<div class="map-key noselect">
+	<div class="bottom-tab-nav" [class.expanded]="expandTabs">
+		<ul class="row">
+			<li class="bottom-tab-nav-toggle col-2" [class.active]="activeTab == 'DAILYTOTAL'"
+				rel="DAILYTOTAL" (click)="navToggle('DAILYTOTAL')">
+				<span class="d-inline d-md-none">Total</span>
+				<span class="d-none d-md-inline">Daily Total</span>
+			</li>
+			<li class="bottom-tab-nav-toggle col-2" [class.active]="activeTab == 'SCHEDULE'"
+				rel="SCHEDULE" (click)="navToggle('SCHEDULE')">
+				<span class="d-inline d-md-none">Sched</span>
+				<span class="d-none d-md-inline">Schedule</span>
+			</li>
+			<li class="bottom-tab-nav-toggle col-2" [class.active]="activeTab == 'WEEK'"
+				rel="WEEK" (click)="navToggle('WEEK')">
+				Week
+			</li>
+			<li class="bottom-tab-nav-toggle col-2" [class.active]="activeTab == 'WEEKDAY'"
+				rel="WEEKDAY" (click)="navToggle('WEEKDAY')">
+				<span class="d-inline d-md-none">Day</span>
+				<span class="d-none d-md-inline">Weekday</span>
+			</li>
+			<li class="bottom-tab-nav-toggle col-2" [class.active]="activeTab == 'TECHNICIAN'"
+				rel="TECHNICIAN" (click)="navToggle('TECHNICIAN')">
+				<span class="d-inline d-md-none">Tech</span>
+				<span class="d-none d-md-inline">Technician</span>
+			</li>
+			<li class="bottom-tab-nav-toggle col-2" [class.active]="activeTab == 'AGE'"
+				rel="AGE" (click)="navToggle('AGE')">
+				Age
+			</li>
+			<!--
+			<li class="bottom-tab-nav-toggle col-1" [class.active]="activeTab == 'TEST'"
+				rel="TEST" (click)="navToggle('TEST')">
+				Test
+			</li>
+		-->
+		</ul>
+	</div>
+	<div class="bottom-tab-container" [ngSwitch]="activeTab" *ngIf="expandTabs"
+		[ngStyle]="{'border-radius':getBorderRadius()}">
+			<div id="DAILYTOTAL" class="bottom-tab-body" *ngSwitchCase="'DAILYTOTAL'">
+				<app-tech-map-filter [filterName]="'Daily Total'" [filterData]="setupDataService.DAILYTOTALS"
+					[itemsPerRow]="6"></app-tech-map-filter>
+			</div>
+			<div id="SCHEDULE" class="bottom-tab-body" *ngSwitchCase="'SCHEDULE'">
+				<app-tech-map-filter [filterName]="'Schedule'" [filterData]="setupDataService.SCHEDULES"
+					[itemsPerRow]="5"></app-tech-map-filter>
+			</div>
+			<div id="WEEK" class="bottom-tab-body" *ngSwitchCase="'WEEK'">
+				<app-tech-map-filter [filterName]="'Week'" [filterData]="setupDataService.WEEKS"
+					[itemsPerRow]="4"></app-tech-map-filter>
+			</div>
+			<div id="WEEKDAY" class="bottom-tab-body" *ngSwitchCase="'WEEKDAY'">
+				<app-tech-map-filter [filterName]="'Weekday'" [filterData]="setupDataService.WEEKDAYS"
+					[itemsPerRow]="5"></app-tech-map-filter>
+			</div>
+			<div id="TECHNICIAN" class="bottom-tab-body" *ngSwitchCase="'TECHNICIAN'">
+				<app-tech-map-filter [filterName]="'Technician'" [filterData]="setupDataService.TECHNICIANS"
+					[itemsPerRow]="5"></app-tech-map-filter>
+			</div>
+			<div id="AGE" class="bottom-tab-body" *ngSwitchCase="'AGE'">
+				<app-tech-map-filter [filterName]="'Age'" [filterData]="setupDataService.AGES"
+					[itemsPerRow]="5"></app-tech-map-filter>
+			</div>
+			<!--
+			<div id="TEST" class="bottom-tab-body" *ngSwitchCase="'TEST'">
+				<h5>Testing Area</h5>
+				<button (click)="techMarkerService.fetchTechMarkers()" style="width: calc(100%/3);">Return All</button>
+				<button *ngFor="let tech of techMarkerService.techList" style="width: calc(100%/6);"
+					(click)="getActiveSetupsByTech([tech.name])">{{tech.name}}</button>
+			</div>
+		-->
+	</div>
+</div>

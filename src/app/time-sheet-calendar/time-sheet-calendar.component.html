@@ -1,0 +1,55 @@
+<div class="container" *ngIf="punchData">
+
+	<div class="row">
+		<div class="blankBox"><strong>{{days[0]}}</strong></div>
+		<div class="blankBox"><strong>{{days[1]}}</strong></div>
+		<div class="blankBox"><strong>{{days[2]}}</strong></div>
+		<div class="blankBox"><strong>{{days[3]}}</strong></div>
+		<div class="blankBox"><strong>{{days[4]}}</strong></div>
+		<div class="blankBox"><strong>{{days[5]}}</strong></div>
+		<div class="blankBox"><strong>{{days[6]}}</strong></div>
+
+		<div class="dayBox" *ngIf="firstOfMonth > 0"></div>
+		<div class="dayBox" *ngIf="firstOfMonth > 1"></div>
+		<div class="dayBox" *ngIf="firstOfMonth > 2"></div>
+		<div class="dayBox" *ngIf="firstOfMonth > 3"></div>
+		<div class="dayBox" *ngIf="firstOfMonth > 4"></div>
+		<div class="dayBox" *ngIf="firstOfMonth > 5"></div>
+
+		<div *ngFor="let day of month.slice(0,7)"
+			class="dayBox" (click)="toggleModal('timePunch', day, dateRange1)">
+			<app-time-sheet-calendar-day [date]="day" [week]="'firstWeek'"
+				[timePunch]="punchData[day.format('YYMMDD')]"></app-time-sheet-calendar-day>
+		</div>
+
+		<div *ngFor="let day of month.slice(7,14)"
+			class="dayBox" (click)="toggleModal('timePunch', day, dateRange1)">
+			<app-time-sheet-calendar-day [date]="day" [week]="'secondWeek'"
+				[timePunch]="punchData[day.format('YYMMDD')]"></app-time-sheet-calendar-day>
+		</div>
+
+		<div class="dayBox" (click)="toggleModal('timePunch', month[14], dateRange1)">
+			<app-time-sheet-calendar-day [date]="month[14]" [week]="'thirdWeek'"
+				[timePunch]="punchData[month[14].format('YYMMDD')]"></app-time-sheet-calendar-day>
+		</div>
+	
+		<div *ngFor="let day of month.slice(15,22)"
+			class="dayBox" (click)="toggleModal('timePunch', day, dateRange2)">
+			<app-time-sheet-calendar-day [date]="day" [week]="'fourthWeek'"
+				[timePunch]="punchData[day.format('YYMMDD')]"></app-time-sheet-calendar-day>
+		</div>
+
+		<div *ngFor="let day of month.slice(22,29)"
+			class="dayBox" (click)="toggleModal('timePunch', day, dateRange2)">
+			<app-time-sheet-calendar-day [date]="day" [week]="'fifthWeek'"
+				[timePunch]="punchData[day.format('YYMMDD')]"></app-time-sheet-calendar-day>
+		</div>
+
+		<div *ngFor="let day of month.slice(29,31)"
+			class="dayBox" (click)="toggleModal('timePunch', day, dateRange2)">
+			<app-time-sheet-calendar-day [date]="day" [week]="'sixthWeek'"
+				[timePunch]="punchData[day.format('YYMMDD')]"></app-time-sheet-calendar-day>
+		</div>
+	</div>
+
+</div>

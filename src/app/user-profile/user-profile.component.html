@@ -1,0 +1,110 @@
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<h1>{{currentUser.username}} Profile</h1>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-4 col-sm-2">
+			<h5>Username:</h5>
+		</div>
+		<div class="col-8 col-sm-4 col-md-2">
+			<h6>{{currentUser.username}}</h6>
+		</div>
+		<div class="col-4 col-sm-2">
+			<h5>Password:</h5>
+		</div>
+		<div class="col-8 col-sm-4 col-md-2">
+			<button class="btn btn-outline-warning w-100" (click)="resetPassword()">Reset</button>
+		</div>
+		<div class="col-4 col-sm-2">
+			<h5>Role:</h5>
+		</div>
+		<div class="col-8 col-sm-4 col-md-2">
+			<h6>{{currentUser.role}}</h6>
+		</div>
+	</div>
+
+	<br/>
+
+	<div class="row">
+		<div class="col-4 col-sm-2">
+			<h5>TaskLog:</h5>
+		</div>
+		<div class="col-8 col-sm-4 col-md-2">
+			<input class="form-control" type="checkbox" 
+				onclick="return false;"
+				[(checked)]="currentUser.preferences['taskLog']">
+		</div>
+		<div class="col-4 col-sm-2">
+			<h5>TimeCard:</h5>
+		</div>
+		<div class="col-8 col-sm-4 col-md-2">
+			<input class="form-control" type="checkbox"
+			onclick="return false;"
+			[(checked)]="currentUser.preferences['timeCard']">
+		</div>
+	</div>
+
+	<br/>
+
+	<div class="row">
+
+		<div class="col-6">
+			<h4>Assigned Technicians:</h4>
+		</div>
+
+		<div class="col-6">
+			<h4>Assigned Tasks:</h4>
+		</div>
+
+		<div class="col-6">
+			<div class="scrollDivOuter techListDiv">
+				<div class="scrollDivInner">
+					<ul>
+						<ng-container *ngFor="let userTech of currentUser.techList; index as i">
+							<li *ngIf="userTech" class="row no-gutters hoverBackground">
+								<ng-template #tipContent>{{getToolTip(userTech, techList)}}</ng-template>
+								<div placement="top" [ngbTooltip]="tipContent">
+									&nbsp;{{userTech}}
+								</div>
+							</li>
+						</ng-container>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-6">
+			<div class="scrollDivOuter taskListDiv">
+				<div class="scrollDivInner">
+					<ul>
+						<ng-container *ngFor="let userTask of currentUser.taskList; index as i">
+							<li *ngIf="userTask" class="row no-gutters hoverBackground">
+								<ng-template #tipContent>{{getToolTip(userTask, taskList)}}</ng-template>
+								<div placement="top" [ngbTooltip]="tipContent">
+									&nbsp;{{userTask}}
+								</div>
+							</li>
+						</ng-container>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<br/>
+
+	<div class="row">
+		<div class="col-3">
+			<button class="btn btn-primary w-100" (click)="logout()">Logout</button>
+		</div>
+	</div>
+
+</div>
+
+<div *ngIf="!currentUser" align="center">
+	<img class="pl-3 loadingIcon" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+</div>

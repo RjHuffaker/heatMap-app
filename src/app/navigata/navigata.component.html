@@ -1,0 +1,75 @@
+<nav class="row no-gutters noselect">
+  <div id="navigataTitle" class="col">
+    <a href="#">Pest Control App</a>
+    
+  </div>
+
+  <div id="horizontalNavigata" class="d-none d-md-inline col-md-auto">
+    <ul>
+      <li *ngIf="securityClearance('TECH')">
+        <a routerLink="/techMap" routerLinkActive="activeLink">Tech Map</a>
+      </li>
+      <li *ngIf="securityClearance('TECH')">
+        <a routerLink="/guesstimator" routerLinkActive="activeLink">Guesstimator</a>
+      </li>
+      <li *ngIf="securityClearance('CSR')">
+        <a routerLink="/timeSheet" routerLinkActive="activeLink">TimeSheet</a>
+      </li>
+      <li *ngIf="securityClearance('CSR')">
+        <a routerLink="/taskLog" routerLinkActive="activeLink">TaskLog</a>
+      </li>
+      <li *ngIf="securityClearance('TECH')">
+        <a routerLink="/article/browse" routerLinkActive="activeLink">Articles</a>
+      </li>
+      <li *ngIf="!authUser">
+        <a routerLink="/user/login" routerLinkActive="activeLink">Login</a>
+      </li>
+      <li *ngIf="securityClearance('SUPERVISOR')">
+        <a routerLink="/user/browse" routerLinkActive="activeLink">Users</a>
+      </li>
+      <li *ngIf="securityClearance('TECH')">
+        <a routerLink="/user/profile" routerLinkActive="activeLink">{{authUser.username}}</a>
+      </li>
+    </ul>
+  </div>
+
+  <div id="verticalNavigata" class="d-inline-flex d-md-none col-auto">
+    <div id="navigataToggle" (click)="showHideList()">
+      &#9776;
+    </div>
+
+    <ul class="vertical-nav-list d-md-none"
+      [ngClass]="{'d-block':listExpanded, 'd-none':!listExpanded}"
+      (click)="showHideList()">
+      <li *ngIf="securityClearance('TECH')">
+        <a routerLink="/techMap" routerLinkActive="activeLink">Tech Map</a>
+      </li>
+      <li *ngIf="securityClearance('TECH')">
+        <a routerLink="/guesstimator" routerLinkActive="activeLink">Guesstimator</a>
+      </li>
+      <li *ngIf="securityClearance('CSR')">
+        <a routerLink="/timeCard" routerLinkActive="activeLink">TimeCard</a>
+      </li>
+      <li *ngIf="securityClearance('CSR')">
+        <a routerLink="/tasks" routerLinkActive="activeLink">Tasks</a>
+      </li>
+      <li *ngIf="securityClearance('CSR')">
+        <a routerLink="/taskLog" routerLinkActive="activeLink">TaskLog</a>
+      </li>
+      <li *ngIf="securityClearance('TECH')">
+        <a routerLink="/article/browse" routerLinkActive="activeLink">Articles</a>
+      </li>
+      <li *ngIf="!authUser">
+        <a routerLink="/user/login" routerLinkActive="activeLink">Login</a>
+      </li>
+      <li *ngIf="securityClearance('SUPERVISOR')">
+        <a routerLink="/user/browse" routerLinkActive="activeLink">Users</a>
+      </li>
+      <li *ngIf="securityClearance('TECH')">
+        <a routerLink="/user/profile" routerLinkActive="activeLink">{{authUser.username}}</a>
+      </li>
+    </ul>
+
+
+  </div>
+</nav>

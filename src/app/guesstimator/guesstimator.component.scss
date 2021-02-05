@@ -1,0 +1,23 @@
+input[type="text"]{
+	width: 100%;
+	background-color: #fff;
+	margin-bottom: 8px;
+	text-overflow: ellipsis;
+}
+
+input[type="number"]{
+	width: 95%;
+	background-color: #fff;
+}
+
+input[step="0.05"]{
+	text-align: center;
+}
+
+input {
+	margin-bottom: 4px;
+}
+
+h4 {
+	margin-top: 16px;
+}

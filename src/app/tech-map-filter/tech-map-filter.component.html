@@ -1,0 +1,29 @@
+<div class="noselect">
+	<div class="row">
+		<div class="col-6">
+			<strong>Sort by {{filterName}}</strong>
+		</div>
+		<div class="col-6" style="text-align: right;">
+			<label>
+				<strong>Exclude All</strong>
+				&nbsp;
+				<input type="checkbox" (click)="selectAllToggle($event)"/>
+			</label>
+		</div>
+	</div>
+	<div class="filter-box">
+		<ul>
+			<li *ngFor="let key of objectKeys(filterData)" class="noselect"
+					[ngStyle]="{'width':'calc(100% / '+itemsPerRow+')'}">
+				<label>
+					<input type="checkbox" [checked]="filterData[key].excluded"
+						(click)="selectToggle(key)"/>
+					<span [ngStyle]="{'text-shadow':getShadow(techMarkerService.colorScale[key])}">
+						<span class="d-inline d-sm-none">{{key.slice(0,4)}}</span>
+						<span class="d-none d-sm-inline">&nbsp;{{filterData[key].name}}</span>
+					</span>
+				</label>
+			</li>
+		</ul>
+	</div>
+</div>

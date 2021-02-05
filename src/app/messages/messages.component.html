@@ -1,0 +1,19 @@
+<div class="messageWrapper container-fluid">
+
+  <div class="messageTitle row no-gutters">
+	  <div class="col">
+	  	<h4>Messages</h4>
+	  </div>
+	  <div>
+	  	<button class="clear" (click)="messageService.clear()">clear</button>
+	  </div>
+  </div>
+
+	<div class="messageWindow row no-gutters">
+		<div class="col">
+			<div *ngFor='let message of messageService.messages'> {{message}} </div>
+		</div>
+	</div>
+
+</div>
+

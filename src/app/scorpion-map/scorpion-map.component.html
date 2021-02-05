@@ -1,0 +1,15 @@
+<div class="inner-container">	<div class="search-container">
+	<input type="text" placeholder="Search for Location" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control" #search id="search-input">
+</div>
+<agm-map #AgmMap [latitude]="lat" [longitude]="lng"
+	[zoom]="zoom" [minZoom]="1" [maxZoom]="17"
+	[mapTypeId]="'hybrid'" [fullscreenControl]="true"
+	[gestureHandling]="'greedy'"
+	(centerChange)="onCenterChange($event)"
+	(zoomChange)="onZoomChange($event)"
+	(mapReady)="onMapReady($event)">
+  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+  <!--
+  	<agm-marker *ngFor="let marker of markerList" [latitude]="marker.lat" [longitude]="marker.lng"></agm-marker>
+  -->
+</agm-map>

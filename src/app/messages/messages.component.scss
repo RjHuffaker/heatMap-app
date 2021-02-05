@@ -1,0 +1,18 @@
+.messageWrapper{
+	height: 100%;
+}
+
+.messageTitle{
+	height: 40px;
+}
+
+.messageWindow{
+	overflow-y: auto;
+	height: calc(100% - 40px);
+	width: 100%;
+	padding: 5px;
+	border: 2px inset;
+	>div{
+		width: 100%;
+	}
+}

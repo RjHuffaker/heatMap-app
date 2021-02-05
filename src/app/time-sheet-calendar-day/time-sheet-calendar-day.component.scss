@@ -1,0 +1,82 @@
+.dayWrapper {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	border: 1px solid #222;
+	padding: 2px;
+}
+
+.dayWrapper:hover:not(.disabled-previous):not(.disabled-upcoming) {
+	box-shadow: inset 0px 0px 2px 1px #222;
+	cursor: pointer;
+}
+
+.timePunchData {
+	font-size: 10pt;
+	text-align: right;
+	padding-right: 2px;
+	height: 20%;
+}
+
+.firstWeek {
+	background-color: rgb(51, 204, 255);
+}
+
+.secondWeek {
+	background-color: rgb(102, 255, 153);
+	top: 2px;
+	left: 2px;
+}
+
+.thirdWeek {
+	background-color: rgb(176, 255, 102);
+	top: 4px;
+	left: 4px;
+}
+
+.fourthWeek {
+	background-color: rgb(255, 255, 176);
+	top: 12px;
+	left: 12px;
+}
+
+.fifthWeek {
+	background-color: rgb(255, 204, 153);
+	top: 14px;
+	left: 14px;
+}
+
+.sixthWeek {
+	background-color: rgb(255, 153, 102);
+	top: 16px;
+	left: 16px;
+}
+
+.disabled-previous {
+	opacity: 0.75;
+	background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0) 15px,
+    rgba(0, 0, 0, 0.5) 17px,
+    rgba(255, 255, 255, 0) 19px
+  );
+}
+
+.disabled-upcoming {
+	opacity: 0.75;
+	background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0) 15px,
+    rgba(0, 0, 0, 0.5) 17px,
+    rgba(255, 255, 255, 0) 19px
+  );
+}
+
+.today {
+	box-shadow: inset 0px 0px 0.5px 0.5px #555;
+	.date {
+		text-shadow: 0px 0px 1px;
+	}
+}
