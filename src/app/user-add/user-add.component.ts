@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { first } from 'rxjs/operators';
 
-import { TaskService, TechMarkerService, UserService } from '@/_services';
+import { TechMarkerService, UserService } from '@/_services';
 import { User } from '../_models/user';
 
 @Component({
@@ -17,8 +17,6 @@ export class UserAddComponent implements OnInit {
 
   techList;
 
-  taskList;
-
   roles = ['TECH', 'CSR', 'SUPERVISOR', 'ADMIN'];
 
   currentUser = {
@@ -26,10 +24,7 @@ export class UserAddComponent implements OnInit {
     password: "",
     role: "TECH",
     preferences: {},
-    techList: [],
-    taskList: [],
-    taskLog: {},
-    timeCard: {}
+    techList: []
   };
 
   modalData = {
@@ -43,7 +38,6 @@ export class UserAddComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private modal: NgbModal,
-    public taskService: TaskService,
     public techMarkerService: TechMarkerService,
     public userService: UserService
  	){
@@ -52,8 +46,6 @@ export class UserAddComponent implements OnInit {
 
   ngOnInit(){
     this.techMarkerService.getTechList().subscribe( techList => this.techList = techList );
-
-    this.taskService.getAll().subscribe( taskList => this.taskList = taskList );
   }
 
   addUser(){
@@ -61,11 +53,7 @@ export class UserAddComponent implements OnInit {
       username: this.currentUser.username,
       password: this.currentUser.password,
       role: this.currentUser.role,
-      preferences: this.currentUser.preferences,
-      techList: this.currentUser.techList,
-      taskList: this.currentUser.taskList,
-      taskLog: this.currentUser.taskLog,
-      timeCard: this.currentUser.timeCard
+      preferences: this.currentUser.preferences
     };
 
     this.userService.register(user).subscribe( res => {
@@ -84,9 +72,6 @@ export class UserAddComponent implements OnInit {
     if(mode==="techManager"){
       this.modalData.userList = this.currentUser.techList.slice();
       this.modalData.itemList = this.techList.slice();
-    } else if(mode==="taskManager"){
-      this.modalData.userList = this.currentUser.taskList.slice();
-      this.modalData.itemList = this.taskList.slice();
     }
 
     this.modal.open(this.userEditModal, { size: 'lg' });
@@ -96,8 +81,6 @@ export class UserAddComponent implements OnInit {
   confirmModal(){
     if(this.modalData.mode === "techManager"){
       this.currentUser.techList = this.modalData.userList.slice();
-    } else if(this.modalData.mode === "taskManager"){
-      this.currentUser.taskList = this.modalData.userList.slice();
     }
     console.log(this.currentUser);
   }

@@ -1,0 +1,51 @@
+<div  class="container noselect">
+	
+	<div class="row">
+		<div class="col">
+			<h1 *ngIf="currentUser.role==='ADMIN'">Manage Call Scripts</h1>
+			<h1 *ngIf="currentUser.role!=='ADMIN'">Browse Call Scripts</h1>
+		</div>
+	</div>
+
+	<div class="row" style="border-bottom: 2px solid grey;">
+		<div class="col-9 col-md-4">
+			<strong><h4>Title</h4></strong>
+		</div>
+		<div class="col-3 d-none d-md-block">
+			<strong><h4>Author</h4></strong>
+		</div>
+		<div class="col-3 d-none d-md-block">
+			<strong><h4>Category</h4></strong>
+		</div>
+		<div class="col-3 col-md-2">
+			
+		</div>
+	</div>
+
+	<div *ngFor="let callScript of callScriptList" (click)="selectRow(callScript.id)"
+		[ngClass]="{'selectedRow': callScript.id===selectedRowId}" class="row crudRow">
+		<div class="col-9 col-md-4">
+			<span>{{callScript.title}}</span>
+		</div>
+		<div class="col-3 d-none d-md-block">
+			<span>{{callScript.author}}</span>
+		</div>
+		<div class="col-3 d-none d-md-block">
+			<span>{{callScript.category}}</span>
+		</div>
+		<div *ngIf="currentUser.role==='ADMIN'" class="col-3 col-md-2">
+			<a href="/callScript/edit/{{callScript.id}}">Edit</a>
+		</div>
+	</div>
+
+	<div *ngIf="currentUser.role==='ADMIN'" class="row" style="margin-top: 16px;">
+		<div class="col-6 col-sm-4 col-md-3">
+			<button class="btn btn-primary w-100" (click)="addCallScript()">Create New Call Script</button>
+		</div>
+	</div>
+
+</div>
+
+<div *ngIf="!callScriptList" align="center">
+	<img class="pl-3 loadingIcon" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+</div>

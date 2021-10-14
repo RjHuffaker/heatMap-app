@@ -31,10 +31,6 @@
 				<strong>Assigned Techs: </strong>
 				<span *ngFor="let tech of user.techList; let isLast=last"> {{tech}}{{isLast ? '' : ',  '}}</span>
 			</div>
-			<div *ngIf="user.taskList.length">
-				<strong>Assigned Tasks: </strong>
-				<span *ngFor="let task of user.taskList; let isLast=last"> {{task}}{{isLast ? '' : ',  '}}</span>
-			</div>
 		</div>
 	</div>
 

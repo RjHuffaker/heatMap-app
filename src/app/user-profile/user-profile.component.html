@@ -29,37 +29,12 @@
 	<br/>
 
 	<div class="row">
-		<div class="col-4 col-sm-2">
-			<h5>TaskLog:</h5>
-		</div>
-		<div class="col-8 col-sm-4 col-md-2">
-			<input class="form-control" type="checkbox" 
-				onclick="return false;"
-				[(checked)]="currentUser.preferences['taskLog']">
-		</div>
-		<div class="col-4 col-sm-2">
-			<h5>TimeCard:</h5>
-		</div>
-		<div class="col-8 col-sm-4 col-md-2">
-			<input class="form-control" type="checkbox"
-			onclick="return false;"
-			[(checked)]="currentUser.preferences['timeCard']">
-		</div>
-	</div>
 
-	<br/>
-
-	<div class="row">
-
-		<div class="col-6">
+		<div class="col-12">
 			<h4>Assigned Technicians:</h4>
 		</div>
 
-		<div class="col-6">
-			<h4>Assigned Tasks:</h4>
-		</div>
-
-		<div class="col-6">
+		<div class="col-12">
 			<div class="scrollDivOuter techListDiv">
 				<div class="scrollDivInner">
 					<ul>
@@ -76,23 +51,6 @@
 			</div>
 		</div>
 		
-		<div class="col-6">
-			<div class="scrollDivOuter taskListDiv">
-				<div class="scrollDivInner">
-					<ul>
-						<ng-container *ngFor="let userTask of currentUser.taskList; index as i">
-							<li *ngIf="userTask" class="row no-gutters hoverBackground">
-								<ng-template #tipContent>{{getToolTip(userTask, taskList)}}</ng-template>
-								<div placement="top" [ngbTooltip]="tipContent">
-									&nbsp;{{userTask}}
-								</div>
-							</li>
-						</ng-container>
-					</ul>
-				</div>
-			</div>
-		</div>
-
 	</div>
 
 	<br/>

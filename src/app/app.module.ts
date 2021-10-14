@@ -30,7 +30,6 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserAddComponent } from './user-add/user-add.component';
 
 import { ScorpionMapComponent } from './scorpion-map/scorpion-map.component';
-import { GuesstimatorComponent } from './guesstimator/guesstimator.component';
 
 import { MessagesComponent } from './messages/messages.component';
 
@@ -39,16 +38,15 @@ import { ArticleReadComponent } from './article-read/article-read.component';
 import { ArticleEditComponent } from './article-edit/article-edit.component';
 import { ArticleAddComponent } from './article-add/article-add.component';
 
+import { CallScriptBrowseComponent } from './call-script-browse/call-script-browse.component';
+import { CallScriptReadComponent } from './call-script-read/call-script-read.component';
+import { CallScriptEditComponent } from './call-script-edit/call-script-edit.component';
+import { CallScriptAddComponent } from './call-script-add/call-script-add.component';
+
 import { TechMapComponent } from './tech-map/tech-map.component';
 import { TechMapFilterComponent } from './tech-map-filter/tech-map-filter.component';
-import { TaskLogComponent } from './task-log/task-log.component';
-
-import { TimeSheetComponent } from './time-sheet/time-sheet.component';
-import { TimeCardComponent } from './time-card/time-card.component';
-import { TimeCardDayComponent } from './time-card-day/time-card-day.component';
-import { TimeSheetCalendarComponent } from './time-sheet-calendar/time-sheet-calendar.component';
-import { TimeSheetCalendarDayComponent } from './time-sheet-calendar-day/time-sheet-calendar-day.component';
-import { TimeSheetModalComponent } from './time-sheet-modal/time-sheet-modal.component';
+import { PromptReadComponent } from './prompt-read/prompt-read.component';
+import { PromptEditComponent } from './prompt-edit/prompt-edit.component';
 
 @NgModule({
   declarations: [
@@ -60,21 +58,23 @@ import { TimeSheetModalComponent } from './time-sheet-modal/time-sheet-modal.com
     UserEditComponent,
     UserAddComponent,
     ScorpionMapComponent,
-    GuesstimatorComponent,
     MessagesComponent,
     ArticleBrowseComponent,
     ArticleReadComponent,
     ArticleEditComponent,
     ArticleAddComponent,
+    CallScriptBrowseComponent,
+    CallScriptReadComponent,
+    CallScriptEditComponent,
+    CallScriptAddComponent,
     TechMapComponent,
     TechMapFilterComponent,
-    TaskLogComponent,
-    TimeSheetComponent,
-    TimeCardComponent,
-    TimeCardDayComponent,
-    TimeSheetCalendarComponent,
-    TimeSheetCalendarDayComponent,
-    TimeSheetModalComponent
+    CallScriptAddComponent,
+    CallScriptBrowseComponent,
+    CallScriptEditComponent,
+    CallScriptReadComponent,
+    PromptReadComponent,
+    PromptEditComponent
   ],
   imports: [
     BrowserModule,

@@ -10,16 +10,10 @@
         <a routerLink="/techMap" routerLinkActive="activeLink">Tech Map</a>
       </li>
       <li *ngIf="securityClearance('TECH')">
-        <a routerLink="/guesstimator" routerLinkActive="activeLink">Guesstimator</a>
-      </li>
-      <li *ngIf="securityClearance('CSR')">
-        <a routerLink="/timeSheet" routerLinkActive="activeLink">TimeSheet</a>
-      </li>
-      <li *ngIf="securityClearance('CSR')">
-        <a routerLink="/taskLog" routerLinkActive="activeLink">TaskLog</a>
+        <a routerLink="/article/browse" routerLinkActive="activeLink">Articles</a>
       </li>
       <li *ngIf="securityClearance('TECH')">
-        <a routerLink="/article/browse" routerLinkActive="activeLink">Articles</a>
+        <a routerLink="/callScript/browse" routerLinkActive="activeLink">Call Scripts</a>
       </li>
       <li *ngIf="!authUser">
         <a routerLink="/user/login" routerLinkActive="activeLink">Login</a>
@@ -45,19 +39,10 @@
         <a routerLink="/techMap" routerLinkActive="activeLink">Tech Map</a>
       </li>
       <li *ngIf="securityClearance('TECH')">
-        <a routerLink="/guesstimator" routerLinkActive="activeLink">Guesstimator</a>
-      </li>
-      <li *ngIf="securityClearance('CSR')">
-        <a routerLink="/timeCard" routerLinkActive="activeLink">TimeCard</a>
-      </li>
-      <li *ngIf="securityClearance('CSR')">
-        <a routerLink="/tasks" routerLinkActive="activeLink">Tasks</a>
-      </li>
-      <li *ngIf="securityClearance('CSR')">
-        <a routerLink="/taskLog" routerLinkActive="activeLink">TaskLog</a>
+        <a routerLink="/article/browse" routerLinkActive="activeLink">Articles</a>
       </li>
       <li *ngIf="securityClearance('TECH')">
-        <a routerLink="/article/browse" routerLinkActive="activeLink">Articles</a>
+        <a routerLink="/callScript/browse" routerLinkActive="activeLink">Call Scripts</a>
       </li>
       <li *ngIf="!authUser">
         <a routerLink="/user/login" routerLinkActive="activeLink">Login</a>
@@ -69,7 +54,6 @@
         <a routerLink="/user/profile" routerLinkActive="activeLink">{{authUser.username}}</a>
       </li>
     </ul>
-
 
   </div>
 </nav>

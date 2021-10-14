@@ -1,0 +1,41 @@
+<div class="container">
+	
+	<div class="row">
+		<div class="col-2">
+			<h5>Prompt:</h5>
+		</div>
+		<textarea class="col-10" [(ngModel)]="currentPrompt.prompt"></textarea>
+	</div>
+
+	<br>
+
+	<div class="row">
+		<button *ngIf="parents.length" class="col-12 btn btn-primary" (click)="goBack()">
+			<span *ngFor="let parent of parents">{{parent.reply}}</span>
+			{{currentPrompt.reply}}
+		</button>
+	</div>
+
+	<div *ngFor="let child of currentPrompt.children; let i = index">
+		
+		<h5>Reply {{i+1}}:</h5>
+
+		<div class="row">
+
+			<button class="col-2 btn btn-outline-danger" (click)="deleteChild(i)">-</button>
+
+			<textarea class="col-8" [(ngModel)]="child.reply"></textarea>
+
+			<button class="col-2 btn btn-outline-primary" (click)="selectChild(child)">>></button>
+
+		</div>
+
+	</div>
+
+	<br>
+
+	<div class="row">
+		<button class="col-12 btn btn-outline-primary" (click)="addChild()">Add Reply</button>
+	</div>
+
+</div>

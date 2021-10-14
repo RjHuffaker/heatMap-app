@@ -8,17 +8,18 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Pest Control App';
 
-  showNavigata = true;
-
-  cityList = ["phoenix","tucson","mesa","chandler","gilbert","scottsdale"];
-
-  constructor(){
-  	this.cityList.forEach(city=>{
-  		if(window.location.href.includes(city)){
-  			this.showNavigata = false;
-  		}
-  	});
-
+  showNavigata(){
+    if(window.location.href === "http://localhost:4200/"){
+      return false;
+    } else if(window.location.href === "http://azpestcontrol.services/"){
+      return false;
+    } else if(window.location.href === "https://azpestcontrol.services/"){
+      return false;
+    } else {
+      return true;
+    }
   }
+
+  constructor(){}
 
 }

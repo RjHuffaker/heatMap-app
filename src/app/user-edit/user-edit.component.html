@@ -1,9 +1,7 @@
 <ng-template #userEditModal let-close="close">
   <div class="modal-header">
     <h4 class="modal-title">
-    	<span *ngIf="modalData.mode==='uploadCSV'">Upload TimeCard CSV</span>
     	<span *ngIf="modalData.mode==='techManager'">Manage Technicians</span>
-    	<span *ngIf="modalData.mode==='taskManager'">Manage User Tasks</span>
     </h4>
     <button type="button" class="close" (click)="close()">
       <span aria-hidden="true">&times;</span>
@@ -13,17 +11,8 @@
   <div class="modal-body">
   	<div class="container">
 	  	
-	  	<div class="row" *ngIf="modalData.mode==='uploadCSV'">
-	  		<div class="col">
-	  			<textarea class="w-100" [(ngModel)]="timeCardCsv"
-	  				style="height: 15em;"></textarea>
-	  		</div>
-	  	</div>
-
-
 	  	<div class="row" *ngIf="modalData.mode!=='uploadCSV'">
 				<div class="col-4">
-					<h5 *ngIf="modalData.mode==='taskManager'">Assigned Tasks</h5>
 					<h5 *ngIf="modalData.mode==='techManager'">Technicians Shown</h5>
 				</div>
 
@@ -38,7 +27,6 @@
 				</div>
 
 				<div class="col-6">
-					<h5 *ngIf="modalData.mode==='taskManager'">Unassigned Tasks</h5>
 					<h5 *ngIf="modalData.mode==='techManager'">Technicians Hidden</h5>
 				</div>
 
@@ -87,20 +75,6 @@
   	</div>
   </div>
 
-  <div class="modal-footer">
-		<button *ngIf="modalData.mode==='uploadCSV'" class="btn btn-success"
-			(click)="uploadTimeCard(); close()">
-			Submit CSV
-		</button>
-		<button *ngIf="modalData.mode==='uploadCSV'" class="btn btn-secondary"
-			(click)="close()">
-      Cancel
-    </button>
-    <button *ngIf="modalData.mode!=='uploadCSV'" class="btn btn-primary"
-    	(click)="confirmModal(); close()">
-      Confirm
-    </button>
-  </div>
 </ng-template>
 
 <div *ngIf="currentUser" class="container">
@@ -140,22 +114,6 @@
 
 	<div class="row">
 		<div class="col-4 col-sm-2">
-			<h5>TaskLog:</h5>
-		</div>
-		<div class="col-8 col-sm-4 col-md-2">
-			<input class="form-control" type="checkbox" 
-				[(ngModel)]="currentUser.preferences['taskLog']"
-				[(checked)]="currentUser.preferences['taskLog']">
-		</div>
-		<div class="col-4 col-sm-2">
-			<h5>TimeCard:</h5>
-		</div>
-		<div class="col-8 col-sm-4 col-md-2">
-			<input class="form-control" type="checkbox"
-			[(ngModel)]="currentUser.preferences['timeCard']"
-			[(checked)]="currentUser.preferences['timeCard']">
-		</div>
-		<div class="col-4 col-sm-2">
 			<h5>Show All Techs:</h5>
 		</div>
 		<div class="col-8 col-sm-4 col-md-2">
@@ -169,15 +127,11 @@
 
 	<div class="row">
 
-		<div class="col-6">
+		<div class="col-12">
 			<h4>Assigned Technicians:</h4>
 		</div>
 
-		<div class="col-6">
-			<h4>Assigned Tasks:</h4>
-		</div>
-
-		<div class="col-6">
+		<div class="col-12">
 			<div class="scrollDivOuter techListDiv">
 				<div class="scrollDivInner">
 					
@@ -199,34 +153,10 @@
 			</div>
 		</div>
 		
-		<div class="col-6">
-			<div class="scrollDivOuter taskListDiv">
-				<div class="scrollDivInner">
-					<ul>
-						<ng-container *ngFor="let userTask of currentUser.taskList; index as i">
-							<li *ngIf="userTask" class="row no-gutters hoverBackground"
-								(click)="toggleModal('taskManager', i)">
-								<ng-template #tipContent>{{getToolTip(userTask, taskList)}}</ng-template>
-								<div placement="top" [ngbTooltip]="tipContent">
-									&nbsp;{{userTask}}
-								</div>
-							</li>
-						</ng-container>
-						<li (click)="toggleModal('taskManager', 0)">
-							&nbsp;<strong class="text-primary">+ TASK</strong>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-
 	</div>
 
 	<div class="row" style="margin-top: 16px;">
-  	<div class="col-3 col-md-2">
-			<button class="btn btn-outline-primary w-100" (click)="toggleModal('uploadCSV')">Upload CSV</button>
-		</div>
-		<div class="col-3 col-md-2">
+  	    <div class="col-3 col-md-2">
 			<button class="btn btn-success w-100" (click)="saveUser()">Save</button>
 		</div>
 		<div class="col-3 col-md-2">

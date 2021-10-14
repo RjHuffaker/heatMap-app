@@ -25,7 +25,6 @@ export class AuthenticationService {
 
     if(loginData){
       this.currentUserSubject.next(loginData);
-      console.log(loginData.taskLog);
     }
     
   }

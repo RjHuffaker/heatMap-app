@@ -1,0 +1,47 @@
+<div class="container" *ngIf="currentCallScript">
+	<br/>
+	<div class="row no-gutters">
+		<div class="col-3 col-sm-2">
+			<h5>Title:</h5>
+		</div>
+		<div class="col-9 col-sm-4">
+			{{currentCallScript.title}}
+		</div>
+	</div>
+
+	<div class="row no-gutters">
+		<div class="col-3 col-sm-2">
+			<h5>Author:</h5>
+		</div>
+		<div class="col-9 col-sm-4">
+			{{currentCallScript.author}}
+		</div>
+	</div>
+
+	<div class="row no-gutters">
+		<div class="col-3 col-sm-2">
+			<h5>Category:</h5>
+		</div>
+		<div class="col-9 col-sm-4">
+			{{currentCallScript.category}}
+		</div>
+	</div>
+
+	<br/>
+	
+	<div class="row">
+		<div class="col-12">
+			<button *ngIf="parents.length" (click)="goBackPrompt()"><<</button>
+		</div>
+	</div>
+
+	<app-prompt-read [prompt]="currentPrompt"></app-prompt-read>
+
+	<div class="row">
+		<div class="col-3 col-sm-2">
+			<button class="btn btn-primary w-100" (click)="goBack()">Go Back</button>
+		</div>
+	</div>
+
+</div>
+

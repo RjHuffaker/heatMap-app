@@ -1,15 +1,15 @@
 <div class="outer-container">
 	<div class="inner-container">
 		
-		<div style="height: 40px; width: 100%;" *ngIf="showNavigata">
+		<div style="height: 40px; width: 100%;" *ngIf="showNavigata()">
 			<app-navigata></app-navigata>
 		</div>
 
-		<div style="height: calc(100% - 40px); width: 100%;" *ngIf="showNavigata">
+		<div style="height: calc(100% - 40px); width: 100%;" *ngIf="showNavigata()">
 			<router-outlet></router-outlet>
 		</div>
 
-		<div style="height: 100%; width: 100%;" *ngIf="!showNavigata">
+		<div style="height: 100%; width: 100%;" *ngIf="!showNavigata()">
 			<router-outlet></router-outlet>
 		</div>
 		<!--

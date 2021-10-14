@@ -2,7 +2,6 @@
   <div class="modal-header">
     <h4 class="modal-title">
     	<span *ngIf="modalData.mode==='techManager'">Manage Technicians</span>
-    	<span *ngIf="modalData.mode==='taskManager'">Manage User Tasks</span>
     </h4>
     <button type="button" class="close" (click)="close()">
       <span aria-hidden="true">&times;</span>
@@ -14,7 +13,6 @@
 	  	
 	  	<div class="row">
 				<div class="col-4">
-					<h5 *ngIf="modalData.mode==='taskManager'">Assigned Tasks</h5>
 					<h5 *ngIf="modalData.mode==='techManager'">Technicians Shown</h5>
 				</div>
 
@@ -29,7 +27,6 @@
 				</div>
 
 				<div class="col-6">
-					<h5 *ngIf="modalData.mode==='taskManager'">Unassigned Tasks</h5>
 					<h5 *ngIf="modalData.mode==='techManager'">Technicians Hidden</h5>
 				</div>
 
@@ -131,10 +128,6 @@
 		</div>
 
 		<div class="col-6">
-			<h4>Assigned Tasks:</h4>
-		</div>
-
-		<div class="col-6">
 			<div class="scrollDivOuter techListDiv">
 				<div class="scrollDivInner">
 					
@@ -153,24 +146,6 @@
 			</div>
 		</div>
 		
-		<div class="col-6">
-			<div class="scrollDivOuter taskListDiv">
-				<div class="scrollDivInner">
-					<ul>
-						<ng-container *ngFor="let userTask of currentUser.taskList; index as i">
-							<li *ngIf="userTask" class="row no-gutters hoverBackground"
-								(click)="toggleModal('taskManager', i)">
-								&nbsp;<span>{{userTask}}</span>
-							</li>
-						</ng-container>
-						<li (click)="toggleModal('taskManager', 0)">
-							&nbsp;<strong class="text-primary">+ TASK</strong>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-
 	</div>
 
 	<div class="row">

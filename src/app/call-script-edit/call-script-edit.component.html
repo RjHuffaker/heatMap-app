@@ -1,0 +1,41 @@
+<div class="container" *ngIf="currentCallScript">
+	<br/>
+	<div class="row">
+		<div class="col-2 col-sm-6">
+			<h5>Title:</h5>
+		</div>
+		<div class="col-2 col-sm-6">
+			<input class="form-control" type="text" [(ngModel)]="currentCallScript.title">
+		</div>
+		<div class="col-2 col-sm-6">
+			<h5>Author:</h5>
+		</div>
+		<div class="col-2 col-sm-6">
+			<input class="form-control" type="text" [(ngModel)]="currentCallScript.author">
+		</div>
+		<div class="col-2 col-sm-6">
+			<h5>Category:</h5>
+		</div>
+		<div class="col-2 col-sm-6">
+			<input class="form-control" type="text" [(ngModel)]="currentCallScript.category">
+		</div>
+	</div>
+	
+	<br>
+
+	<app-prompt-edit [prompt]="currentPrompt"></app-prompt-edit>
+
+	<br>
+
+	<div class="row">
+		<div class="col-4">
+			<button class="btn btn-primary w-100" (click)="saveCallScript()">Save</button>
+		</div>
+		<div class="col-4">
+			<button class="btn btn-secondary w-100" (click)="goBack()">Cancel</button>
+		</div>
+		<div class="col-4">
+			<button class="btn btn-outline-danger w-100" (click)="deleteCallScript()">Delete</button>
+		</div>
+	</div>
+</div>

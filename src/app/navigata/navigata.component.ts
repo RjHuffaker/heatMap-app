@@ -33,7 +33,6 @@ export class NavigataComponent {
   }
 	
   showHideList(){
-    console.log('showHideList');
     this.listExpanded = !this.listExpanded;
   }
 
@@ -41,6 +40,10 @@ export class NavigataComponent {
     if(!this.authUser) return false;
     let roles = ['TECH', 'CSR', 'SUPERVISOR', 'ADMIN'];
     return roles.indexOf(role) <= roles.indexOf(this.authUser.role);
+  }
+
+  isHeatMap(){
+    return window.location.href === "http://localhost:4200/";
   }
 
 }

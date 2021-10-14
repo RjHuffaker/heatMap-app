@@ -5,6 +5,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { Article } from '@/_models';
 
+import { AuthenticationService } from '@/_services';
+
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };

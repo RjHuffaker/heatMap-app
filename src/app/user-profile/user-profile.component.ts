@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
 
-import { AuthenticationService, MessageService, TaskService, TechMarkerService, UserService } from '@/_services';
+import { AuthenticationService, MessageService, TechMarkerService, UserService } from '@/_services';
 import { User } from '@/_models';
 
 @Component({
@@ -19,13 +19,10 @@ export class UserProfileComponent implements OnInit {
 
   techList;
 
-  taskList;
-
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
     private messageService: MessageService,
-    private taskService: TaskService,
     private techMarkerService: TechMarkerService,
     private userService: UserService
   ){
@@ -36,8 +33,6 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(){
     this.techMarkerService.getTechList().subscribe( techList => this.techList = techList );
-
-    this.taskService.getAll().subscribe( taskList => this.taskList = taskList );
   }
 
   resetPassword(){

@@ -7,7 +7,4 @@ export class User {
   role: string;
   preferences?: string;
   techList?: string;
-  taskList?: string;
-  taskLog?: string;
-  timeCard?: string;
 }

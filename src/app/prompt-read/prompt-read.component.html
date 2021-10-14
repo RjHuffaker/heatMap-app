@@ -1,0 +1,23 @@
+<div class="container">
+
+	<div class="row">
+		<a *ngFor="let parent of parents" class="btn btn-outline-primary" (click)="goBack()">{{parent.prompt}}: {{currentPrompt.reply}}</a>
+	</div>
+
+	<br>
+
+	<div class="row">
+		<strong>Prompt:</strong> {{currentPrompt.prompt}}
+	</div>
+
+	<br>
+
+	<div class="row" *ngFor="let child of currentPrompt.children; let i = index">
+		<br>
+		<button class="col-12 btn btn-outline-primary" (click)="selectChild(child)">
+			<p><strong>Reply {{i+1}}:</strong> {{child.reply}}</p>
+		</button>
+		<br>
+	</div>
+
+</div>
